@@ -1,0 +1,53 @@
+{
+  "scripts": {
+    "dev:p1": "cd p1 && vite --port 5171",
+    "dev:page1": "cd p1 && vite --port 5171",
+    "dev:p2": "cd p2 && vite --port 5172",
+    "dev:page2": "cd p2 && vite --port 5172",
+    "dev:p3": "cd p3 && vite --port 5173",
+    "dev:page3": "cd p3 && vite --port 5173",
+    "dev:p4": "cd p4 && vite --port 5174",
+    "dev:page4": "cd p4 && vite --port 5174",
+    "dev:p5": "cd p5 && vite --port 5175",
+    "dev:page5": "cd p5 && vite --port 5175",
+    "dev:p6": "cd p6 && vite --port 5176",
+    "dev:page6": "cd p6 && vite --port 5176",
+    "dev:p7": "cd p7 && vite --port 5177",
+    "dev:page7": "cd p7 && vite --port 5177",
+    "dev:p8": "cd p8 && vite --port 5178",
+    "dev:page8": "cd p8 && vite --port 5178",
+    "dev:p9": "cd p9 && vite --port 5179",
+    "dev:page9": "cd p9 && vite --port 5179",
+    "dev:p10": "cd p10 && vite --port 5180",
+    "dev:page10": "cd p10 && vite --port 5180",
+    "dev:p11": "cd p11 && vite --port 5181",
+    "dev:page11": "cd p11 && vite --port 5181",
+    "dev:p12": "cd p12 && vite --port 5182",
+    "dev:page12": "cd p12 && vite --port 5182",
+    "dev:p13": "cd p13 && vite --port 5183",
+    "dev:page13": "cd p13 && vite --port 5183",
+    "dev:p14": "cd p14 && vite --port 5184",
+    "dev:page14": "cd p14 && vite --port 5184",
+    "dev:p15": "cd p15 && vite --port 5185",
+    "dev:page15": "cd p15 && vite --port 5185",
+    "dev:p16": "cd p16 && vite --port 5186",
+    "dev:page16": "cd p16 && vite --port 5186",
+    "dev:indec": "cd indec && vite --port 5170",
+    "dev:index": "cd indec && vite --port 5170"
+  },
+  "dependencies": {
+    "framer-motion": "^13.1.1",
+    "lenis": "^1.3.26",
+    "lucide-react": "^1.39.0",
+    "ogl": "^1.0.11",
+    "postprocessing": "^6.39.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1",
+    "vgpu": "^0.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.2.2"
+  }
+}

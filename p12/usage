@@ -1,0 +1,14 @@
+import SplashCursor from './SplashCursor'
+
+<SplashCursor
+  DENSITY_DISSIPATION={0.5}
+  VELOCITY_DISSIPATION={5}
+  PRESSURE={0.75}
+  CURL={9}
+  SPLAT_RADIUS={0.24}
+  SPLAT_FORCE={6500}
+  COLOR_UPDATE_SPEED={10}
+  SHADING={false}
+  RAINBOW_MODE
+  COLOR="#A855F7"
+/>

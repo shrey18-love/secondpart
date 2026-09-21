@@ -1,0 +1,18 @@
+book inside compo ;- https://framer.com/m/Book-AFRs.js@mxOP9zughWqzCr7yH17p
+
+page 16 = chats = page 10
+page 15 = emotional versions = page 9
+page 14 = puzzle game for her if she is boared = page 11
+paeg 13 = create camera game =page 15
+page 12 = our date photos  = page 8
+page 11 = My Birthday = page 7
+page 10 = nandiis birthday = page 6
+page 9 = uttarayan = page 5
+page 8 = first hug = page 2
+page 7 = colour game = page 12 
+page 6 = kiss = page 3 
+page 5 = water ripple effect = page 16
+page 4 = laser beam follow curson = page 13
+page 3 = things she like (uncomplete) = page 4
+page 2 = heartbeam speed = page 14 
+page 1 = she said yes = page 1

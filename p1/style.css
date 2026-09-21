@@ -1,0 +1,30 @@
+:root { --cream:#f5f0e7; --ink:#151412; }
+* { box-sizing:border-box; }
+html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(--cream); }
+body { font-family:"DM Mono",monospace; color:var(--ink); }
+#wall { position:relative; width:100%; height:100%; overflow:hidden; background:radial-gradient(circle at 50% 40%,#fffdf8 0,#f5f0e7 65%); touch-action:none; }
+header,footer { position:absolute; z-index:3; display:flex; width:100%; align-items:flex-start; justify-content:space-between; padding:25px 30px; pointer-events:none; }
+.mark { color:var(--ink); text-decoration:none; font-size:19px; letter-spacing:-.08em; font-weight:500; pointer-events:auto; }.mark sup { font-size:7px; letter-spacing:0; vertical-align:top; margin-left:2px; }
+header p, footer, #reset { font-size:9px; line-height:1.35; letter-spacing:.04em; margin:1px 0 0; }
+#reset { border:0; color:var(--ink); background:none; font-family:inherit; cursor:pointer; padding:0; pointer-events:auto; } #reset span { font-size:17px; vertical-align:-2px; margin-left:6px; }
+.intro { position:absolute; z-index:3; left:50%; top:46%; transform:translate(-50%,-50%); text-align:center; white-space:nowrap; pointer-events:none; }
+h1 { font-family:"Instrument Serif",Georgia,serif; font-size:clamp(68px,11vw,168px); font-weight:400; line-height:.73; letter-spacing:-.075em; margin:0; } h1 i { font-weight:400; }
+.cool-button { position:relative; margin-top:31px; border:1px solid var(--ink); border-radius:999px; padding:11px 15px 10px; background:var(--cream); color:var(--ink); font:500 9px/1 "DM Mono",monospace; letter-spacing:.1em; cursor:pointer; pointer-events:auto; transition:transform .18s ease, background .18s ease, color .18s ease; }
+.cool-button:hover { background:var(--ink); color:var(--cream); transform:scale(1.05); }.cool-button:active { transform:scale(.95); }.cool-button span { margin-left:6px; font-size:12px; }
+.emoji-link { display:inline-block; color:inherit; text-decoration:none; font-family:system-ui,sans-serif; font-size:.52em; vertical-align:.08em; letter-spacing:0; cursor:pointer; pointer-events:auto; transition:transform .18s ease; }.emoji-link:hover { transform:scale(1.18) rotate(8deg); }.emoji-link:active { transform:scale(.92); }
+#pillows { position:absolute; inset:0; z-index:2; }
+.pillow { position:absolute; width:var(--size); aspect-ratio:1.12; cursor:grab; will-change:transform; transform:translate3d(0,0,0); backface-visibility:hidden; user-select:none; -webkit-user-select:none; filter:drop-shadow(0 12px 8px rgba(41,25,20,.16)); }
+.pillow:active { cursor:grabbing; filter:drop-shadow(0 25px 18px rgba(41,25,20,.28)); }
+.pillow img { width:100%; height:100%; object-fit:contain; pointer-events:none; display:block; }
+.pillow[data-kind="rose"] { filter:hue-rotate(330deg) saturate(.78) drop-shadow(0 15px 10px rgba(41,25,20,.17)); }
+.pillow[data-kind="plum"] { filter:hue-rotate(275deg) saturate(.78) brightness(.82) drop-shadow(0 15px 10px rgba(41,25,20,.18)); }
+.pillow[data-kind="orange"] { filter:hue-rotate(350deg) saturate(1.5) brightness(1.05) drop-shadow(0 15px 10px rgba(41,25,20,.18)); }
+.pillow[data-kind="silver"] { filter:grayscale(1) brightness(1.5) contrast(.78) drop-shadow(0 15px 10px rgba(41,25,20,.18)); }
+.pillow[data-kind="black"] { filter:grayscale(1) brightness(.23) contrast(1.2) drop-shadow(0 15px 10px rgba(0,0,0,.28)); }
+.pillow[data-kind="pink"] { filter:hue-rotate(320deg) saturate(.5) brightness(1.45) drop-shadow(0 15px 10px rgba(41,25,20,.18)); }
+.pillow[data-kind="blue"] { filter:hue-rotate(220deg) saturate(1.35) brightness(.86) drop-shadow(0 15px 10px rgba(20,35,50,.2)); }
+.pillow[data-kind="green"] { filter:hue-rotate(115deg) saturate(1.05) brightness(.76) drop-shadow(0 15px 10px rgba(20,42,27,.2)); }
+.pillow[data-kind="purple"] { filter:hue-rotate(275deg) saturate(1.05) brightness(.8) drop-shadow(0 15px 10px rgba(40,22,52,.2)); }
+.pillow[data-kind="yellow"] { filter:hue-rotate(43deg) saturate(1.1) brightness(1.18) drop-shadow(0 15px 10px rgba(65,49,16,.18)); }
+footer { z-index:3; bottom:0; top:auto; align-items:flex-end; pointer-events:none; } footer span:last-child { text-align:right; }
+@media(max-width:640px){ header,footer{ padding:20px; } header p{ display:none; } h1{ font-size:22vw; } .intro{ top:44%; } .pillow{ filter:drop-shadow(0 10px 8px rgba(41,25,20,.17)); } }

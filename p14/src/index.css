@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+
+:root {
+  color: #fff;
+  background: #000;
+  font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+
+.hyperspeed-page { position: fixed; inset: 0; background: #000; }
+.hyperspeed-page #lights { position: absolute; inset: 0; }
+.hyperspeed-page__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent 20%, rgba(0, 0, 0, .55) 100%);
+}
+
+.heartbeat-content {
+  position: absolute;
+  top: 7vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 92%;
+  max-width: 950px;
+  pointer-events: none;
+  z-index: 5;
+  user-select: none;
+}
+
+/* ── Main Heading ── */
+.heartbeat-heading {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.85rem;
+  line-height: 1;
+  user-select: none;
+}
+
+/* "MY" - Big & Bold */
+.heartbeat-my {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(3.8rem, 11vw, 7.8rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #ffffff 0%, #ffd4f4 50%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 25px rgba(244, 114, 182, 0.8)) drop-shadow(0 0 50px rgba(192, 132, 252, 0.6));
+  animation: myPulse 3s ease-in-out infinite alternate;
+}
+
+/* "HEARTBEATS" - Smaller beside "MY" */
+.heartbeat-words {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.6rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  color: rgba(255, 255, 255, 0.95);
+  text-transform: uppercase;
+  text-shadow:
+    0 0 20px rgba(236, 72, 153, 0.7),
+    0 0 40px rgba(168, 85, 247, 0.5),
+    0 4px 15px rgba(0, 0, 0, 0.9);
+}
+
+/* ── Animated Heartbeat ECG Wave Line & Heart Trigger ── */
+.heartbeat-ecg-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.85rem;
+}
+
+.heartbeat-ecg {
+  width: min(100%, 280px);
+  height: 28px;
+  opacity: 0.9;
+}
+
+.heartbeat-ecg svg {
+  width: 100%;
+  height: 100%;
+}
+
+.heartbeat-ecg__path {
+  fill: none;
+  stroke: #f472b6;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px #f472b6) drop-shadow(0 0 16px #a855f7);
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: ecgFlow 2.8s ease-in-out infinite;
+}
+
+.heartbeat-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  pointer-events: auto;
+}
+
+.heartbeat-heart-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(244, 114, 182, 0.8));
+  transition: transform 0.2s ease, filter 0.2s ease;
+  animation: heartPulse 1.5s ease-in-out infinite;
+}
+
+.heartbeat-heart-btn:hover {
+  transform: scale(1.3) rotate(8deg);
+  filter: drop-shadow(0 0 16px rgba(244, 114, 182, 1));
+}
+
+.heartbeat-click-me {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #f472b6;
+  text-transform: lowercase;
+  opacity: 0.9;
+  text-shadow: 0 0 8px rgba(244, 114, 182, 0.6);
+}
+
+/* ── Subtitle Down Below ── */
+.heartbeat-sub {
+  margin: 0;
+  padding: 0.55rem 1.3rem;
+  border-radius: 9999px;
+  background: rgba(15, 10, 24, 0.6);
+  border: 1px solid rgba(244, 114, 182, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.78rem, 1.8vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Love Modal Popup ── */
+.love-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(6, 3, 12, .78);
+  backdrop-filter: blur(14px) saturate(75%);
+  -webkit-backdrop-filter: blur(14px) saturate(75%);
+  animation: modalIn .3s ease-out;
+  pointer-events: auto;
+}
+
+.love-modal__card {
+  position: relative;
+  width: min(100%, 36rem);
+  padding: clamp(2rem, 5vw, 3.5rem);
+  border: 1px solid rgba(244, 114, 182, .35);
+  border-radius: 2rem;
+  background: linear-gradient(135deg, rgba(168, 85, 247, .18), rgba(46, 38, 53, .22) 42%, rgba(6, 3, 12, .3));
+  box-shadow:
+    inset 0 1px 0 rgba(244, 114, 182, .3),
+    0 25px 80px rgba(0, 0, 0, .75);
+  backdrop-filter: blur(18px) saturate(100%);
+  -webkit-backdrop-filter: blur(18px) saturate(100%);
+  animation: cardPop .4s cubic-bezier(.34, 1.56, .64, 1);
+  text-align: left;
+}
+
+@keyframes cardPop {
+  0%   { opacity: 0; transform: scale(.85) translateY(15px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.love-modal__eyebrow {
+  margin: 0 0 1.2rem;
+  color: #f472b6;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(244, 114, 182, 0.4);
+}
+
+.love-modal__writing {
+  color: rgba(255, 255, 255, .92);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.8;
+}
+
+.love-modal__writing p {
+  margin: 0 0 1rem;
+}
+
+.love-modal__writing p:last-child {
+  margin-bottom: 0;
+}
+
+.love-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255, 255, 255, .12);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
+.love-modal__close:hover {
+  background: rgba(255, 255, 255, .25);
+}
+
+/* ── Animations ── */
+@keyframes myPulse {
+  0% {
+    filter: drop-shadow(0 0 20px rgba(244, 114, 182, 0.7)) drop-shadow(0 0 40px rgba(192, 132, 252, 0.5));
+  }
+  100% {
+    filter: drop-shadow(0 0 35px rgba(244, 114, 182, 0.95)) drop-shadow(0 0 70px rgba(168, 85, 247, 0.85));
+  }
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.22); }
+}
+
+@keyframes ecgFlow {
+  0% {
+    stroke-dashoffset: 600;
+  }
+  60%, 100% {
+    stroke-dashoffset: 0;
+  }
+}

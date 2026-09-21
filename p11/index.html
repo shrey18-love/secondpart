@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>You are bored so here is a game for you 🤗💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    --photo: url('https://id-preview--084e1b48-1f07-433e-a58c-ef9349777bc5.lovable.app/__l5e/assets-v1/d1b58e67-a2a9-4414-9cdf-2ce42955e6ea/romantic-puzzle.png');
+    --pink: #ff4d7e;
+    --rose: #ff8fa3;
+    --deep: #6b1a36;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+    background:
+      radial-gradient(circle at 20% 10%, #ffb8d1 0%, transparent 50%),
+      radial-gradient(circle at 80% 90%, #ff6f91 0%, transparent 50%),
+      linear-gradient(135deg, #ffe0ec 0%, #ffc2d4 50%, #ff8fa3 100%);
+    color: var(--deep);
+    padding: 24px 16px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(28px, 5vw, 48px);
+    text-align: center;
+    margin: 8px 0 4px;
+    color: var(--deep);
+    text-shadow: 0 2px 12px rgba(255, 77, 126, 0.3);
+  }
+  .subtitle {
+    text-align: center;
+    color: #a02a4d;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .wrap {
+    width: 100%;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .count { font-weight: 600; color: var(--deep); }
+  .btns { display: flex; gap: 8px; }
+  button {
+    font-family: inherit;
+    background: linear-gradient(135deg, var(--pink), #ff6f91);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255, 77, 126, 0.4);
+    transition: transform .15s;
+  }
+  button:hover { transform: translateY(-2px); }
+  .board {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    background: rgba(255,255,255,0.4);
+    border: 3px solid var(--pink);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(255, 77, 126, 0.35);
+    position: relative;
+  }
+  .slot {
+    position: relative;
+    border: 1px dashed rgba(255, 77, 126, 0.25);
+  }
+  .piece {
+    position: absolute;
+    inset: 0;
+    background-image: var(--photo);
+    background-size: 300% 300%;
+    cursor: grab;
+  }
+  .piece:active { cursor: grabbing; }
+  .tray {
+    border: 3px dashed var(--pink);
+    background: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    padding: 12px;
+    min-height: 100px;
+  }
+  .tray-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #a02a4d;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .tray-pieces { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .tray .piece {
+    position: relative;
+    width: 120px;
+    height: 68px;
+    border-radius: 10px;
+    border: 3px solid white;
+    box-shadow: 0 4px 14px rgba(255,77,126,0.35);
+    transition: transform .15s;
+  }
+  .tray .piece:hover { transform: scale(1.05); }
+  @media (max-width:520px) { .tray .piece { width: 90px; height: 52px; } }
+  .win {
+    position: fixed; inset: 0;
+    background: rgba(107, 26, 54, 0.75);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(6px);
+  }
+  .win.show { display: flex; animation: pop .5s; }
+  .win-card {
+    background: linear-gradient(135deg, #fff0f5, #ffd1dc);
+    padding: 40px 50px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+  }
+  .win-card h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    margin: 0 0 8px;
+    color: var(--deep);
+  }
+  @keyframes pop { from { transform: scale(.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .preview-btn { background: linear-gradient(135deg, #ff8fa3, #ffb8d1); }
+  .preview-overlay {
+    position: fixed; inset: 0;
+    background: rgba(107,26,54,0.9);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 50; padding: 24px;
+  }
+  .preview-overlay.show { display: flex; }
+  .preview-overlay img { max-width: 100%; max-height: 100%; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+</style>
+</head>
+<body>
+  <h1>You are bored so here is a game for you 🤗💕</h1>
+  <p class="subtitle">Drag the pieces into the grid to complete our picture ✨</p>
+
+  <div class="wrap">
+    <div class="topbar">
+      <div class="count">Placed: <span id="placed">0</span> / 9</div>
+      <div class="btns">
+        <button id="reset">Reset</button>
+        <button id="preview" class="preview-btn">Hold to Peek</button>
+      </div>
+    </div>
+
+    <div class="board" id="board"></div>
+
+    <div class="tray">
+      <div class="tray-label">Pieces — drag onto the grid</div>
+      <div class="tray-pieces" id="tray"></div>
+    </div>
+  </div>
+
+  <div class="win" id="win">
+    <div class="win-card">
+      <h2>You did it! 💕</h2>
+      <p>Made with love just for you 🌸</p>
+    </div>
+  </div>
+
+  <div class="preview-overlay" id="previewOverlay">
+    <img src="https://id-preview--084e1b48-1f07-433e-a58c-ef9349777bc5.lovable.app/__l5e/assets-v1/d1b58e67-a2a9-4414-9cdf-2ce42955e6ea/romantic-puzzle.png" alt="preview" />
+  </div>
+
+<script>
+  const SIZE = 3, TOTAL = 9;
+  let board = Array(TOTAL).fill(null);
+  let tray = [];
+  let dragging = null;
+
+  const boardEl = document.getElementById('board');
+  const trayEl = document.getElementById('tray');
+  const placedEl = document.getElementById('placed');
+  const winEl = document.getElementById('win');
+
+  function shuffle(a) {
+    for (let i = a.length-1; i>0; i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]]=[a[j],a[i]];
+    }
+    return a;
+  }
+
+  function pieceBg(p) {
+    const r = Math.floor(p/SIZE), c = p%SIZE;
+    return `${(c/(SIZE-1))*100}% ${(r/(SIZE-1))*100}%`;
+  }
+
+  function makePiece(p, from) {
+    const el = document.createElement('div');
+    el.className = 'piece';
+    el.draggable = true;
+    el.style.backgroundPosition = pieceBg(p);
+    el.addEventListener('dragstart', () => { dragging = { piece: p, from }; });
+    el.addEventListener('dragend', () => { dragging = null; });
+    return el;
+  }
+
+  function render() {
+    boardEl.innerHTML = '';
+    for (let i=0;i<TOTAL;i++) {
+      const slot = document.createElement('div');
+      slot.className = 'slot';
+      slot.addEventListener('dragover', e => e.preventDefault());
+      slot.addEventListener('drop', () => dropOnSlot(i));
+      if (board[i] !== null) slot.appendChild(makePiece(board[i], i));
+      boardEl.appendChild(slot);
+    }
+    trayEl.innerHTML = '';
+    tray.forEach(p => trayEl.appendChild(makePiece(p, 'tray')));
+    placedEl.textContent = board.filter(v=>v!==null).length;
+    winEl.classList.toggle('show', board.every((v,i)=>v===i));
+  }
+
+  function dropOnSlot(slot) {
+    if (!dragging) return;
+    const { piece, from } = dragging;
+    const occ = board[slot];
+    if (from === 'tray') {
+      tray = tray.filter(p => p !== piece);
+      if (occ !== null) tray.push(occ);
+      board[slot] = piece;
+    } else {
+      board[from] = occ;
+      board[slot] = piece;
+    }
+    dragging = null;
+    render();
+  }
+
+  function dropOnTray() {
+    if (!dragging) return;
+    const { piece, from } = dragging;
+    if (from === 'tray') { dragging=null; return; }
+    board[from] = null;
+    tray.push(piece);
+    dragging = null;
+    render();
+  }
+
+  const trayContainer = document.querySelector('.tray');
+  trayContainer.addEventListener('dragover', e => e.preventDefault());
+  trayContainer.addEventListener('drop', dropOnTray);
+
+  function reset() {
+    board = Array(TOTAL).fill(null);
+    tray = shuffle(Array.from({length: TOTAL}, (_,i)=>i));
+    render();
+  }
+  document.getElementById('reset').addEventListener('click', reset);
+
+  const previewBtn = document.getElementById('preview');
+  const previewOv = document.getElementById('previewOverlay');
+  const showPrev = () => previewOv.classList.add('show');
+  const hidePrev = () => previewOv.classList.remove('show');
+  previewBtn.addEventListener('mousedown', showPrev);
+  previewBtn.addEventListener('mouseup', hidePrev);
+  previewBtn.addEventListener('mouseleave', hidePrev);
+  previewBtn.addEventListener('touchstart', e => { e.preventDefault(); showPrev(); });
+  previewBtn.addEventListener('touchend', hidePrev);
+
+  reset();
+</script>
+</body>
+</html>

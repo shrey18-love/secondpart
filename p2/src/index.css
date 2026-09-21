@@ -1,0 +1,515 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0a0908;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: clip; /* Fix for CSS position: sticky */
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.scroll-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Container provides scroll space for the frame sequence */
+.scroll-video {
+  position: relative;
+  height: 400vh;
+  background: #0a0908;
+}
+
+/* Sticky container stays pinned to top of screen during scroll */
+.scroll-video__sticky {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #0a0908;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.scroll-video__media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scroll-video__shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(10, 9, 8, 0.3), transparent 45%, rgba(10, 9, 8, 0.5));
+}
+
+.scroll-video h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: min(90%, 15ch);
+  margin: 0;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: clamp(3.5rem, 10vw, 8.5rem);
+  font-weight: 750;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  text-align: center;
+  text-shadow: 0 5px 34px rgba(0, 0, 0, 0.8);
+  transform-origin: center;
+  will-change: opacity, transform;
+}
+
+.scroll-video__hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  z-index: 1;
+  margin: 0;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Floating Notes tied with Ropes
+   ───────────────────────────────────────────────────────────── */
+
+.romantic-section {
+  position: relative;
+  z-index: 20;
+  min-height: 100vh;
+  background: #fcfcfc;
+  padding: 0;
+  color: #111111;
+  overflow: hidden;
+}
+
+/* Two ambient glow layers for depth */
+.romantic-bg-glow {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rem;
+  height: 60rem;
+  background: radial-gradient(circle, rgba(244, 162, 97, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  animation: pulse-glow 7s ease-in-out infinite alternate;
+}
+.romantic-bg-glow--b {
+  top: 55%;
+  width: 40rem;
+  height: 40rem;
+  background: radial-gradient(circle, rgba(255, 200, 120, 0.04) 0%, transparent 55%);
+  animation-delay: 3s;
+}
+
+@keyframes pulse-glow {
+  from { opacity: 0.3; transform: translateX(-50%) scale(0.9); }
+  to   { opacity: 1;   transform: translateX(-50%) scale(1.08); }
+}
+
+/* ── Stage: full-viewport container ── */
+.floating-notes-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 750px;
+}
+
+/* ── SVG Rope Layer ── */
+.ropes-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.rope {
+  stroke-dasharray: 5 5;
+  stroke-linecap: round;
+  animation: rope-breathe 5s ease-in-out infinite alternate;
+}
+.rope--0 { animation-delay: 0s; }
+.rope--1 { animation-delay: 1s; }
+.rope--2 { animation-delay: 2s; }
+.rope--3 { animation-delay: 3s; }
+
+@keyframes rope-breathe {
+  from { opacity: 0.2; stroke-dashoffset: 0; }
+  to   { opacity: 0.5; stroke-dashoffset: 10; }
+}
+
+/* ── Anchor Knot at bottom center ── */
+.anchor-knot {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anchor-knot__ring {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(244, 162, 97, 0.15);
+  animation: ring-expand 3s ease-in-out infinite;
+}
+
+@keyframes ring-expand {
+  0%   { transform: scale(0.6); opacity: 0.6; }
+  50%  { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(0.6); opacity: 0; }
+}
+
+.anchor-knot__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f4a261, rgba(244, 162, 97, 0.3));
+  box-shadow: 0 0 12px rgba(244, 162, 97, 0.5), 0 0 30px rgba(244, 162, 97, 0.15);
+}
+
+/* ── Floating Note Cards ── */
+
+/* Position each card explicitly using % from left and top */
+.floating-note {
+  position: absolute;
+  z-index: 10;
+  width: 17rem;
+  padding: 1.5rem 1.4rem 1.8rem;
+  background: rgba(18, 15, 12, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: default;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Card placements — spread across the viewport */
+.floating-note--0 {
+  left: 6%;
+  top: 12%;
+  animation: sway-a 6s ease-in-out infinite alternate;
+}
+.floating-note--1 {
+  left: 28%;
+  top: 28%;
+  animation: sway-b 5.5s ease-in-out infinite alternate;
+  animation-delay: 0.8s;
+}
+.floating-note--2 {
+  right: 26%;
+  top: 8%;
+  animation: sway-c 6.5s ease-in-out infinite alternate;
+  animation-delay: 1.5s;
+}
+.floating-note--3 {
+  right: 4%;
+  top: 22%;
+  animation: sway-d 5s ease-in-out infinite alternate;
+  animation-delay: 2.2s;
+}
+
+.floating-note:hover {
+  border-color: rgba(244, 162, 97, 0.3);
+  box-shadow:
+    0 14px 44px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(244, 162, 97, 0.08);
+}
+
+/* Each note sways uniquely — gentle bob + slight rotation */
+@keyframes sway-a {
+  0%   { transform: translateY(0) rotate(-1.2deg); }
+  100% { transform: translateY(-10px) rotate(0.8deg); }
+}
+@keyframes sway-b {
+  0%   { transform: translateY(0) rotate(0.6deg); }
+  100% { transform: translateY(-8px) rotate(-0.9deg); }
+}
+@keyframes sway-c {
+  0%   { transform: translateY(0) rotate(-0.5deg); }
+  100% { transform: translateY(-12px) rotate(1.1deg); }
+}
+@keyframes sway-d {
+  0%   { transform: translateY(0) rotate(0.9deg); }
+  100% { transform: translateY(-7px) rotate(-0.7deg); }
+}
+
+/* Small knot / tie-point under each card */
+.floating-note__knot {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f4a261;
+  opacity: 0.7;
+  box-shadow: 0 0 8px rgba(244, 162, 97, 0.4);
+}
+
+.floating-note__tag {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #f4a261;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+  opacity: 0.9;
+}
+
+.floating-note__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.floating-note__text {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ── Responsive: stack on small screens ── */
+@media (max-width: 950px) {
+  .floating-notes-stage {
+    height: auto;
+    min-height: auto;
+    padding: 4rem 1.2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .floating-note {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: min(88vw, 22rem);
+    animation: sway-a 6s ease-in-out infinite alternate !important;
+  }
+
+  .ropes-svg,
+  .anchor-knot {
+    display: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Hug Finale — dreamy blurred closing section
+   ───────────────────────────────────────────────────────────── */
+
+.hug-finale {
+  position: relative;
+  z-index: 20;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(4rem, 10vw, 8rem) 1.5rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(244, 162, 97, 0.12), transparent 55%),
+    radial-gradient(circle at 15% 85%, rgba(233, 120, 90, 0.1), transparent 45%),
+    linear-gradient(180deg, #0a0908 0%, #140f0c 45%, #0a0908 100%);
+}
+
+/* Soft blurred amber orbs drifting slowly behind the note */
+.hug-finale__bokeh {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  filter: blur(38px);
+}
+.hug-finale__bokeh span {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 162, 97, 0.55), rgba(244, 162, 97, 0) 70%);
+  opacity: 0.5;
+  animation: bokeh-drift 14s ease-in-out infinite alternate;
+}
+.hug-finale__bokeh span:nth-child(1) { width: 16rem; height: 16rem; top: 8%;  left: 6%;  animation-delay: 0s; }
+.hug-finale__bokeh span:nth-child(2) { width: 12rem; height: 12rem; top: 60%; left: 14%; animation-delay: 2s; }
+.hug-finale__bokeh span:nth-child(3) { width: 20rem; height: 20rem; top: 18%; right: 4%; animation-delay: 4s; }
+.hug-finale__bokeh span:nth-child(4) { width: 10rem; height: 10rem; bottom: 10%; right: 16%; animation-delay: 1s; }
+.hug-finale__bokeh span:nth-child(5) { width: 14rem; height: 14rem; bottom: 4%; left: 42%; animation-delay: 3s; }
+.hug-finale__bokeh span:nth-child(6) { width: 9rem;  height: 9rem;  top: 42%; left: 46%; animation-delay: 5s; }
+
+@keyframes bokeh-drift {
+  from { transform: translate3d(0, 0, 0) scale(0.9); }
+  to   { transform: translate3d(2rem, -2.5rem, 0) scale(1.15); }
+}
+
+/* Blurred hearts rising gently */
+.hug-finale__hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  filter: blur(2px);
+}
+.hug-finale__hearts span {
+  position: absolute;
+  bottom: -3rem;
+  color: rgba(244, 122, 130, 0.7);
+  font-size: 1.4rem;
+  opacity: 0;
+  animation: heart-rise 11s linear infinite;
+}
+.hug-finale__hearts span:nth-child(1) { left: 18%; font-size: 1.1rem; animation-delay: 0s; }
+.hug-finale__hearts span:nth-child(2) { left: 36%; font-size: 1.7rem; animation-delay: 2.5s; }
+.hug-finale__hearts span:nth-child(3) { left: 55%; font-size: 1.2rem; animation-delay: 5s; }
+.hug-finale__hearts span:nth-child(4) { left: 72%; font-size: 1.9rem; animation-delay: 1.5s; }
+.hug-finale__hearts span:nth-child(5) { left: 88%; font-size: 1.3rem; animation-delay: 7s; }
+
+@keyframes heart-rise {
+  0%   { transform: translateY(0) scale(0.7); opacity: 0; }
+  15%  { opacity: 0.8; }
+  85%  { opacity: 0.5; }
+  100% { transform: translateY(-105vh) scale(1.1); opacity: 0; }
+}
+
+/* Frosted glass love note */
+.hug-finale__card {
+  position: relative;
+  z-index: 2;
+  width: min(92vw, 40rem);
+  padding: clamp(2.2rem, 5vw, 3.6rem) clamp(1.8rem, 5vw, 3.4rem);
+  text-align: center;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(24, 18, 14, 0.4);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    inset 0 1px rgba(255, 255, 255, 0.06);
+  opacity: 0;
+  transform: translateY(34px) scale(0.97);
+  transition: opacity 1.1s ease, transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hug-finale.is-visible .hug-finale__card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hug-finale__eyebrow {
+  margin: 0 0 1.1rem;
+  color: #f4a261;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.9s ease 0.35s, transform 0.9s ease 0.35s;
+}
+.hug-finale__title {
+  margin: 0 0 1.6rem;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-shadow: 0 4px 26px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.9s ease 0.5s, transform 0.9s ease 0.5s;
+}
+.hug-finale__feeling {
+  margin: 0 auto;
+  max-width: 34rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(1rem, 1.6vw, 1.16rem);
+  line-height: 1.85;
+  font-style: italic;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.9s ease 0.68s, transform 0.9s ease 0.68s;
+}
+.hug-finale__sign {
+  display: inline-block;
+  margin-top: 2rem;
+  color: #f6c39a;
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.9s ease 0.86s, transform 0.9s ease 0.86s;
+}
+.hug-finale.is-visible .hug-finale__eyebrow,
+.hug-finale.is-visible .hug-finale__title,
+.hug-finale.is-visible .hug-finale__feeling,
+.hug-finale.is-visible .hug-finale__sign {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hug-finale.is-visible .hug-finale__eyebrow { opacity: 0.9; }
+.hug-finale.is-visible .hug-finale__feeling { opacity: 1; }
+
+/* Soft dark vignette frame around the ending */
+.hug-finale__blur-edge {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: inset 0 0 12rem 3rem rgba(10, 9, 8, 0.85);
+}
+
+@media (max-width: 600px) {
+  .hug-finale__bokeh { filter: blur(28px); }
+  .hug-finale__card { padding: 2rem 1.4rem; }
+}
+
+
+
